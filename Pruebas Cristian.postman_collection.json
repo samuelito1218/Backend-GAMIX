@@ -1,0 +1,365 @@
+{
+  "info": {
+    "_postman_id": "385b110e-5502-4e0f-9278-c991e06ea7ec",
+    "name": "Pruebas Cristian",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "34857308"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"usuario\": \"samuel.arredondo\",\r\n    \"password\": \"contraseña123456\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3003",
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Enviar Solicitud de amistad",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwidXN1YXJpbyI6Imp1YW4uc3VhcmV6Iiwicm9sIjoidXN1YXJpbyIsImlhdCI6MTc3ODUyNDEyMywiZXhwIjoxNzc4NTMxMzIzfQ.cMnS7yEBKJDXvUEcPk3EYwv5bKhhQyno1-tfHNiBfOM",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"receptor_id\": 2\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3004/solicitudes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3004",
+          "path": [
+            "solicitudes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Login solicitado",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"usuario\": \"angelica.marcillo\",\r\n    \"password\": \"contraseña123456\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3003/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3003",
+          "path": [
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Aceptar solicitud de amistad",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXN1YXJpbyI6ImFuZ2VsaWNhLm1hcmNpbGxvIiwicm9sIjoidXN1YXJpbyIsImlhdCI6MTc3ODUyNDIzNywiZXhwIjoxNzc4NTMxNDM3fQ.iecxJzW5ufh7vzly7QBNt4_fWaVputkd-i_BUyVlbuM",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3004/solicitudes/3/aceptar",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3004",
+          "path": [
+            "solicitudes",
+            "3",
+            "aceptar"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ver amigos",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXN1YXJpbyI6InNhbXVlbC5hcnJlZG9uZG8iLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzc4NTIyMTY0LCJleHAiOjE3Nzg1MjkzNjR9.Tm_p1wmPvgW18JAUs_QSBLqLKQl19GMk3gT190PY2xc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3002/amistades/5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3002",
+          "path": [
+            "amistades",
+            "5"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "solicitud a si mismo",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXN1YXJpbyI6InNhbXVlbC5hcnJlZG9uZG8iLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzc4NTIyMTY0LCJleHAiOjE3Nzg1MjkzNjR9.Tm_p1wmPvgW18JAUs_QSBLqLKQl19GMk3gT190PY2xc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"solicitante_id\": 5,\r\n    \"receptor_id\": 5\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3004/solicitudes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3004",
+          "path": [
+            "solicitudes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Enviar Solicitud de amistad repetida",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXN1YXJpbyI6InNhbXVlbC5hcnJlZG9uZG8iLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzc4NTIyMTY0LCJleHAiOjE3Nzg1MjkzNjR9.Tm_p1wmPvgW18JAUs_QSBLqLKQl19GMk3gT190PY2xc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"solicitante_id\": 5,\r\n    \"receptor_id\": 1\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:3004/solicitudes",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3004",
+          "path": [
+            "solicitudes"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Notificaciones",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXN1YXJpbyI6InNhbXVlbC5hcnJlZG9uZG8iLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzc4NTIyMTY0LCJleHAiOjE3Nzg1MjkzNjR9.Tm_p1wmPvgW18JAUs_QSBLqLKQl19GMk3gT190PY2xc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3004/notificaciones/5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3004",
+          "path": [
+            "notificaciones",
+            "5"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "marcar notificacion como leida",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXN1YXJpbyI6InNhbXVlbC5hcnJlZG9uZG8iLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzc4NTIyMTY0LCJleHAiOjE3Nzg1MjkzNjR9.Tm_p1wmPvgW18JAUs_QSBLqLKQl19GMk3gT190PY2xc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3004/notificaciones/1/leer",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3004",
+          "path": [
+            "notificaciones",
+            "1",
+            "leer"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Eliminar amistad",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXN1YXJpbyI6InNhbXVlbC5hcnJlZG9uZG8iLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzc4NTIyMTY0LCJleHAiOjE3Nzg1MjkzNjR9.Tm_p1wmPvgW18JAUs_QSBLqLKQl19GMk3gT190PY2xc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3002/amistades/5/amigo/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3002",
+          "path": [
+            "amistades",
+            "5",
+            "amigo",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Historial de amistades",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwidXN1YXJpbyI6InNhbXVlbC5hcnJlZG9uZG8iLCJyb2wiOiJ1c3VhcmlvIiwiaWF0IjoxNzc4NTIyMTY0LCJleHAiOjE3Nzg1MjkzNjR9.Tm_p1wmPvgW18JAUs_QSBLqLKQl19GMk3gT190PY2xc",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3004/solicitudes/historial/5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3004",
+          "path": [
+            "solicitudes",
+            "historial",
+            "5"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
