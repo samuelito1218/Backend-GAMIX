@@ -6,6 +6,25 @@ const connection = mysql.createPool({
     password: process.env.DB_PASSWORD || "",
     database: "solicitudes_db"
 });
+// Resetea una solicitud existente a "pendiente" (para reenvíos tras eliminar amistad)
+async function resetearSolicitud(solicitante_id, receptor_id) {
+    const [result] = await connection.query(
+        `UPDATE solicitudes 
+         SET estado        = 'pendiente',
+             solicitante_id = ?,      
+             receptor_id    = ?,      
+             creado_en      = NOW(), 
+             actualizado_en = NOW()
+         WHERE (solicitante_id = ? AND receptor_id = ?)
+            OR (solicitante_id = ? AND receptor_id = ?)`,
+        [
+            solicitante_id, receptor_id,           // SET los nuevos roles
+            solicitante_id, receptor_id,            // WHERE dirección A→B
+            receptor_id,    solicitante_id          // WHERE dirección B→A
+        ]
+    );
+    return result;
+}
 
 // ─── Enviar solicitud ─────────────────────────────────────────────────────────
 async function crearSolicitud(solicitante_id, receptor_id) {
@@ -86,5 +105,6 @@ module.exports = {
     actualizarEstado,
     solicitudesEnviadas,
     solicitudesRecibidas,
-    solicitudesPorEstado
+    solicitudesPorEstado,
+    resetearSolicitud
 };

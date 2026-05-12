@@ -14,11 +14,23 @@ async function llamarCrearAmistad(usuario_id, amigo_id) {
     return response.json();
 }
 
+// ─── Llamada interna: verificar si dos usuarios siguen siendo amigos ──────────
+async function verificarSonAmigos(usuario_id, amigo_id) {
+    try {
+        const response = await fetch(`${AMISTADES_URL}/amistades/${usuario_id}`);
+        const data = await response.json();
+        if (!data.ok || !Array.isArray(data.data)) return false;
+        return data.data.some(a => a.amigo_id === amigo_id);
+    } catch {
+        return false;
+    }
+}
+
 // ─── POST /solicitudes ────────────────────────────────────────────────────────
 async function enviarSolicitud(req, res) {
     try {
-        const solicitante_id = req.usuario.id; // viene del token directamente
-        const { receptor_id } = req.body;      // solo el receptor viene del body
+        const solicitante_id = req.usuario.id;
+        const { receptor_id } = req.body;
 
         if (!receptor_id) {
             return res.status(400).json({ ok: false, mensaje: "Falta el receptor" });
@@ -33,9 +45,19 @@ async function enviarSolicitud(req, res) {
             if (existente.estado === "pendiente") {
                 return res.status(409).json({ ok: false, mensaje: "Ya existe una solicitud pendiente entre estos usuarios" });
             }
+
             if (existente.estado === "aceptada") {
-                return res.status(409).json({ ok: false, mensaje: "Ya son amigos" });
-            }
+    const sigueAmistad = await verificarSonAmigos(solicitante_id, receptor_id);
+    if (sigueAmistad) {
+        return res.status(409).json({ ok: false, mensaje: "Ya son amigos" });
+    }
+
+    // En lugar de INSERT, reseteamos el registro existente
+    await solicitudModel.resetearSolicitud(solicitante_id, receptor_id);
+    const solicitudId = existente.id;
+    await notificacionModel.crearNotificacion(receptor_id, "solicitud_amistad", solicitudId);
+    return res.status(201).json({ ok: true, mensaje: "Solicitud enviada", solicitud_id: solicitudId });
+}
         }
 
         const solicitud = await solicitudModel.crearSolicitud(solicitante_id, receptor_id);
@@ -49,7 +71,6 @@ async function enviarSolicitud(req, res) {
         return res.status(500).json({ ok: false, mensaje: "Error al enviar solicitud" });
     }
 }
-
 // ─── PUT /solicitudes/:id/aceptar ─────────────────────────────────────────────
 async function aceptarSolicitud(req, res) {
     try {
